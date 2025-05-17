@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Госуслуги — Проверка результатов ЕГЭ</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f6f8;
+    }
+
+    header {
+      background-color: #ffffff;
+      padding: 15px 30px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0050b3;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 60px auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #0050b3;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .loading {
+      text-align: center;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .results {
+      display: none;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    .fail {
+      color: red;
+      font-weight: bold;
+    }
+
+    .info-block {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .info-block p {
+      margin: 6px 0;
+    }
+
+    .stamp {
+      margin-top: 30px;
+      text-align: right;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .appeal-button {
+      margin-top: 30px;
+      padding: 12px;
+      width: 100%;
+      background-color: #d9534f;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .appeal-button:hover {
+      background-color: #c9302c;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">госуслуги</div>
+</header>
+
+<div class="container" id="loginForm">
+  <h1>Вход в личный кабинет</h1>
+  <p style="text-align: center;">Просмотр результатов ЕГЭ через ЕСИА</p>
+  <label for="passport">Серия и номер паспорта</label>
+  <input type="text" id="passport" placeholder="1234 567890">
+
+  <label for="snils">СНИЛС</label>
+  <input type="text" id="snils" placeholder="123-456-789 00">
+
+  <button onclick="startLoading()">Войти через Госуслуги</button>
+</div>
+
+<div class="container" id="loadingScreen" style="display: none;">
+  <div class="loading">Проверка данных в федеральной базе...</div>
+</div>
+
+<div class="container results" id="resultsScreen">
+  <h1>Результаты ЕГЭ – 2025</h1>
+  <div class="info-block">
+    <p><strong>ФИО:</strong> Антонов Максим Константинович</p>
+    <p><strong>Дата рождения:</strong> 04.06.2007</p>
+    <p><strong>Регион сдачи:</strong> Московская область, г. Сергиев Посад</p>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Предмет</th>
+        <th>Дата экзамена</th>
+        <th>Баллы</th>
+        <th>Результат</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Математика (профиль)</td>
+        <td>27 мая 2025</td>
+        <td class="fail">18</td>
+        <td class="fail">Неудовлетворительно</td>
+      </tr>
+      <tr>
+        <td>Русский язык</td>
+        <td>30 мая 2025</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Обществознание</td>
+        <td>2 июня 2025</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="appeal-button" onclick="alert('Заявка на апелляцию принята. Ожидайте рассмотрения.');">Подать апелляцию</button>
+</div>
+
+<script>
+  function startLoading() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('loadingScreen').style.display = 'block';
+
+    setTimeout(() => {
+      document.getElementById('loadingScreen').style.display = 'none';
+      document.getElementById('resultsScreen').style.display = 'block';
+    }, 3000); // 3 секунды ожидания
+  }
+</script>
+
+</body>
+</html>
